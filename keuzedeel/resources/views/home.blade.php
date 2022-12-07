@@ -15,6 +15,8 @@
             </h2>
         </x-slot>
     </x-app-layout>
+
+    {{ $data }}
 </body>
 
 </html>
