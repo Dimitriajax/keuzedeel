@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [DatasetController::class, 'insert'])->middleware(['auth', 'verified'])->name('home');
+Route::get('/')->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
