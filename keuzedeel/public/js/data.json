@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "category": "leeftijd",
+        "info": [
+            10,
+            20,
+            40
+        ]
+    },
+    {
+        "id": 2,
+        "category": "bmi",
+        "info": "average  bmi 18"
+    },
+    {
+        "id": 3,
+        "category": "buikomtrek",
+        "info": "average 18"
+    },
+    {
+        "id": 4,
+        "category": "lengte",
+        "info": "average 18"
+    },
+    {
+        "id": 5,
+        "category": "gewicht",
+        "info": "average 18"
+    },
+    {
+        "id": 6,
+        "category": "vegatarier",
+        "info": "average 18"
+    },
+    {
+        "id": 7,
+        "category": "gezondA",
+        "info": "average 18"
+    },
+    {
+        "id": 8,
+        "category": "gezondB",
+        "info": "average 18"
+    },
+    {
+        "id": 9,
+        "category": "stress",
+        "info": "average 18"
+    },
+    {
+        "id": 10,
+        "category": "depressie",
+        "info": "average 18"
+    }
+]
