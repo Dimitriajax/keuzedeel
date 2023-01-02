@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DatasetController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-Route::get('/')->name('home');
+Route::get('/home', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
