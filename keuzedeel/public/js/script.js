@@ -17,7 +17,9 @@ async function fetchData(file) {
 }
 
 function show() {
-    const retrieved = fetchData('js/data.json');
+    const retrieved = fetch('http://localhost:8000/api/data')
+        .then(response => response.json())
+
     retrieved.then((data) => {
         boxes.forEach(box => {
             box.addEventListener('click', () => {
@@ -52,40 +54,6 @@ function showSquares(squares, array, data, box) {
             if (box.id == d.category) {
 
                 squares[count - 1].innerText = d.category;
-
-                console.log(d.info);
-                // console.log(10, 12, 40, 15)
-                var ctx = document.getElementById("myChart");
-
-
-                var myChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: [10, 12, 14, 20, 31],
-                        datasets: [{
-                            label: 'Jaar oud',
-                            data: [10, 12, 14, 20, 31],
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.5)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)'
-                            ],
-                            borderColor: [
-                                'rgba(255,99,132,1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)'
-                            ],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        //cutoutPercentage: 40,
-                        responsive: false,
-
-                    }
-                });
 
             }
         });
