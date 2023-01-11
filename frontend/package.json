@@ -1,0 +1,5 @@
+{
+    "scripts": {
+        "watch": "npx tailwindcss -i ./css/input.css -o ./dist/style.css --watch"
+    }
+}
