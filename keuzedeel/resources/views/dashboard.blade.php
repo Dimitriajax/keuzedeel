@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="js/script.js" defer></script>
+    <!-- <script src="js/script.js" defer></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -30,7 +30,7 @@
                         <div class="flex justify-between w-full grid grid-cols-2 place-items-end ">
                             <p class="font-bold text-lg text-end">BMI</p>
                             <label class="switch">
-                                <input type="checkbox" id="bmi">
+                                <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -99,55 +99,134 @@
                         <canvas class=" max-h-64" id="age"></canvas>
                     </div>
                     <script>
-                    fetch('http://localhost:8000/api/data/gender/count')
-                        .then((response) => response.json())
-                        .then((data) => {
-                            const ctx = document.getElementById('age');
-                            console.log(data);
-                            new Chart(ctx, {
-                                type: 'doughnut',
-                                data: {
-                                    labels: ['Man', 'Vrouw'],
-                                    datasets: [{
-                                        label: '%',
-                                        data: [data.men, data.women],
-                                        borderWidth: 1
-                                    }]
-                                },
+                    function showAge() {
+                        fetch('http://localhost:8000/api/data/gender/count')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('age');
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Man', 'Vrouw'],
+                                        datasets: [{
+                                            label: '%',
+                                            data: [data.men, data.women],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                });
                             });
-                        });
+                    }
+
+                    showAge();
                     </script>
                 </div>
-                <div class="bg-blue h-full w-full rounded-xl " id="box-2">
+                <div class="bg-green-200 h-full w-full rounded-xl ">
+
                     <div>
                         <canvas class=" max-h-64" id="bmi"></canvas>
                     </div>
                     <script>
-                    fetch('http://localhost:8000/api/data/gender/count')
-                        .then((response) => response.json())
-                        .then((data) => {
-                            const ctx = document.getElementById('bmi');
-                            console.log(data);
-                            new Chart(ctx, {
-                                type: 'doughnut',
-                                data: {
-                                    labels: ['Man', 'Vrouw'],
-                                    datasets: [{
-                                        label: '%',
-                                        data: [data.men, data.women],
-                                        borderWidth: 1
-                                    }]
-                                },
+                    function showBmi() {
+                        fetch('http://localhost:8000/api/data/bmi/count')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('bmi');
+                                console.log(ctx);
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'doughnut',
+                                    data: {
+                                        labels: ['Ondergewicht', 'Gezond', 'Overgewicht', 'Zwaar overgewicht'],
+                                        datasets: [{
+                                            label: '',
+                                            data: [data.underweight, data.healthy, data.overweight, data.obese],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                });
                             });
-                        });
+                    }
+                    showBmi();
                     </script>
                 </div>
             </div>
             <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="bg-blue h-full w-full rounded-xl hidden" id="box-3">
+                <div class="bg-blue h-full w-full rounded-xl" id="box-3">
+
+                    <div>
+                        <canvas class=" max-h-64" id="weight"></canvas>
+                    </div>
+                    <script>
+                    function showWeight() {
+                        fetch('http://localhost:8000/api/data/weight/count')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('weight');
+                                console.log(ctx);
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Man', 'Vrouw'],
+                                        datasets: [{
+                                            label: 'kg',
+                                            data: [data.men, data.women],
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Gemiddelde gewicht'
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                    }
+                    showWeight();
+                    </script>
 
                 </div>
-                <div class="bg-pink h-full w-full rounded-xl hidden" id="box-4">
+                <div class="bg-pink h-full w-full rounded-xl " id="box-4">
+
+                    <div>
+                        <canvas class="" id="height"></canvas>
+                    </div>
+                    <script>
+                    function showHeight() {
+                        fetch('http://localhost:8000/api/data/height/count')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('height');
+                                console.log(ctx);
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Man', 'Vrouw'],
+                                        datasets: [{
+                                            label: 'cm',
+                                            data: [data.men, data.women],
+
+                                        }]
+                                    },
+                                    options: {
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Gemiddelde lengte'
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                    }
+                    showHeight();
+                    </script>
 
                 </div>
             </div>

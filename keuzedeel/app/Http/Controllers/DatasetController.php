@@ -93,39 +93,93 @@ class DatasetController extends Controller
         }
 
         if ($filter == "count") {
-            $dataList = Dataset::select($colomn)
-                ->get();
 
-            $bmi = array();
+            if ($colomn == 'bmi') {
 
-            $bmi['underweight'] = [];
-            $bmi['healthy'] = [];
-            $bmi['overweight'] = [];
-            $bmi['obese'] = [];
+                $dataList = Dataset::select($colomn)
+                    ->get();
+
+                $bmi = array();
+
+                $bmi['underweight'] = [];
+                $bmi['healthy'] = [];
+                $bmi['overweight'] = [];
+                $bmi['obese'] = [];
 
 
-            foreach ($dataList as $value) {
+                foreach ($dataList as $value) {
 
-                if ($value['bmi'] < 18.5) {
-                    $bmi['underweight'][] = $value;
+                    if ($value['bmi'] < 18.5) {
+                        $bmi['underweight'][] = $value;
+                    }
+
+                    if ($value['bmi'] > 18.5 && $value['bmi'] < 24.9) {
+                        $bmi['healthy'][] = $value;
+                    }
+
+                    if ($value['bmi'] > 24.9 && $value['bmi'] < 29.9) {
+                        $bmi['overweight'][] = $value;
+                    }
+
+                    if ($value['bmi'] > 29.9) {
+                        $bmi['obese'][] = $value;
+                    }
                 }
 
-                if ($value['bmi'] > 18.5 && $value['bmi'] < 24.9) {
-                    $bmi['healthy'][] = $value;
+                $bmiCount = array('underweight' => count($bmi['underweight']), 'healthy' => count($bmi['healthy']), 'overweight' => count($bmi['overweight']), 'obese' => count($bmi['obese']));
+
+                return response($bmiCount);
+            }
+            if ($colomn == 'weight') {
+                $dataList = Dataset::select($colomn, 'gender')
+                    ->get();
+
+                foreach ($dataList as $value) {
+                    if ($value['gender'] == 1) {
+                        $weightMens[] = $value['weight'];
+                    }
+
+                    if ($value['gender'] == 2) {
+                        $weightWomens[] = $value['weight'];
+                    }
                 }
 
-                if ($value['bmi'] > 24.9 && $value['bmi'] < 29.9) {
-                    $bmi['overweight'][] = $value;
-                }
 
-                if ($value['bmi'] > 29.9) {
-                    $bmi['obese'][] = $value;
-                }
+                $avgMenWeight = array_sum($weightMens) / (count($weightMens));
+                $avgWomenWeight = array_sum($weightWomens) / (count($weightWomens));
+
+
+                return response()->json(['men' => round($avgMenWeight, 2), 'women' => round($avgWomenWeight, 2)]);
             }
 
-            $bmiCount = array('underweight' => count($bmi['underweight']), 'healthy' => count($bmi['healthy']), 'overweight' => count($bmi['overweight']), 'obese' => count($bmi['obese']));
+            if ($colomn == 'height') {
+                $dataList = Dataset::select($colomn, 'gender')
+                    ->get();
 
-            return response()->json([$colomn => $bmiCount]);
+                foreach ($dataList as $value) {
+                    if ($value['gender'] == 1) {
+                        $heightMens[] = $value['height'];
+                    }
+
+                    if ($value['gender'] == 2) {
+                        $heightWomens[] = $value['height'];
+                    }
+                }
+
+                $avgMenHeight = array_sum($heightMens) / (count($heightMens));
+                $avgWomenHeight = array_sum($heightWomens) / (count($heightWomens));
+
+
+                return response()->json(['men' => round($avgMenHeight, 2), 'women' => round($avgWomenHeight, 2)]);
+            }
+
+            if ($colomn == 'kcal_intake') {
+                $dataList = Dataset::select($colomn, 'gender', 'age')
+                    ->get();
+
+
+                return $dataList;
+            }
         }
     }
 
