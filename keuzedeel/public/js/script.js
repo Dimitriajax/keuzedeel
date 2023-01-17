@@ -2,9 +2,6 @@ let checked = document.querySelectorAll('input[type="checkbox"]:checked');
 let boxes = document.querySelectorAll('input[type="checkbox"]');
 let count = checked.length;
 
-const ctx = document.getElementById('myChart');
-
-
 let array = [];
 let squares = [];
 
@@ -17,9 +14,7 @@ async function fetchData(file) {
 }
 
 function show() {
-    const retrieved = fetch('http://localhost:8000/api/data')
-        .then(response => response.json())
-
+    const retrieved = fetchData('data.json');
     retrieved.then((data) => {
         boxes.forEach(box => {
             box.addEventListener('click', () => {
@@ -30,7 +25,6 @@ function show() {
 
                 count = change(box, count);
                 count == 0 && (array = []);
-
 
                 updateArray(array, count);
                 showSquares(squares, array, data, box);
@@ -49,15 +43,13 @@ function showSquares(squares, array, data, box) {
         appear(square, array);
     });
 
-    if (array.length >= 1) {
-        data.forEach(d => {
-            if (box.id == d.category) {
-
-                squares[count - 1].innerText = d.category;
-
-            }
-        });
-    }
+    // if (array.length >= 1) {
+    //     data.forEach(d => {
+    //         if (box.id == d.category) {
+    //             squares[count - 1].innerText = d.category;
+    //         }
+    //     });
+    // }
 }
 
 function appear(box, array) {
@@ -87,10 +79,10 @@ function updateArray(array, count) {
 
     for (let i = 0; i < array.length; i++) {
         if (array[i] === count) {
+            console.log(array[i])
             array.splice(count, 1);
         }
     }
     return array
 }
-
 

@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/data', [DatasetController::class, 'index']);
-Route::get('/data/{filter}', [DatasetController::class, 'show']);
+Route::get('/data/{colomn}', [DatasetController::class, 'show']);
+Route::get('/data/{colomn}/{filter}', [DatasetController::class, 'showFilter']);;

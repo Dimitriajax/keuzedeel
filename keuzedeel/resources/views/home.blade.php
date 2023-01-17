@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-guest-layout>
 
 
 
@@ -54,5 +54,4 @@
         </div>
         <script src="/js/script.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-</x-app-layout>
+</x-guest-layout>

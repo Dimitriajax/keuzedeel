@@ -20,16 +20,16 @@ return new class extends Migration
         // Loop through the array of rows and insert each one into the database
         Schema::create('datasets', function (Blueprint $table) {
             $table->id();
-            $table->string('zipcode')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('group_size_cat')->nullable();
-            $table->string('age_cat')->nullable();
-            $table->string('age_t1')->nullable();
-            $table->string('age_t2')->nullable();
-            $table->string('bmi_t1')->nullable();
-            $table->string('weight_t1')->nullable();
-            $table->string('height_t1')->nullable();
-            $table->string('bmi_t2')->nullable();
+            $table->integer('gender')->nullable();
+            $table->float('age')->nullable();
+            $table->float('bmi')->nullable();
+            $table->float('weight')->nullable();
+            $table->float('height')->nullable();
+            $table->float('dbp')->nullable();
+            $table->float('packyears')->nullable();
+            $table->float('smoking')->nullable();
+            $table->float('kcal_intake')->nullable();
+            $table->float('ldi_sum')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('created_at')->nullable();
         });

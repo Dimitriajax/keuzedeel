@@ -23,17 +23,21 @@ class DatasetSeeder extends Seeder
         $rows = array_map('str_getcsv', explode("\n", $csv));
 
 
+        
+        unset($rows[0]);
         foreach ($rows as $row) {
             Dataset::query()->create([
-                'zipcode' => $row[0],
-                'gender' => $row[1],
-                'group_size_cat' => $row[2],
-                'age_cat' => $row[3],
-                'age_t1' => $row[5],
-                'age_t2' => $row[6],
-                'bmi_t1' => $row[7],
-                'weight_t1' => $row[8],
-                'height_t1' => $row[9],
+                'gender' => $row[0],
+                'age' => $row[1],
+                'bmi' => $row[2],
+                'weight' => $row[3],
+                'height' => $row[4],
+                'dbp' => $row[5],
+                'packyears' => $row[6],
+                'smoking' => $row[7],
+                'kcal_intake' => $row[8],
+                'ldi_sum' => $row[9],
+
             ]);
         }
     }
