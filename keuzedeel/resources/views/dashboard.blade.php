@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <!-- <script src="js/script.js" defer></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/chart.js"></script>
 </head>
 
 <body class="bg-base h-screen w-screen flex justify-center items-center">
@@ -35,13 +35,6 @@
                             </label>
                         </div>
                         <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">BUIKOMTREK</p>
-                            <label class="switch">
-                                <input type="checkbox" id="buikomtrek">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
                             <p class="font-bold text-lg">LENGTE</p>
                             <label class="switch">
                                 <input type="checkbox" id="lengte">
@@ -56,45 +49,24 @@
                             </label>
                         </div>
                         <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">VEGATARIER</p>
+                            <p class="font-bold text-lg">BLOEDDRUK</p>
                             <label class="switch">
-                                <input type="checkbox" id="vegatarier">
+                                <input type="checkbox" id="bloeddruk">
                                 <span class="slider round"></span>
                             </label>
                         </div>
                         <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">GEZOND.</p>
+                            <p class="font-bold text-lg">KCAL INNAME</p>
                             <label class="switch">
-                                <input type="checkbox" id="gezondA">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">ROOKT</p>
-                            <label class="switch">
-                                <input type="checkbox" id="gezondB">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">STRESS</p>
-                            <label class="switch">
-                                <input type="checkbox" id="stress">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="flex justify-between w-full grid grid-cols-2 place-items-end">
-                            <p class="font-bold text-lg">DEPRESSIE</p>
-                            <label class="switch">
-                                <input type="checkbox" id="depressie">
+                                <input type="checkbox" id="kcalInname">
                                 <span class="slider round"></span>
                             </label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="bg-green-200 h-full w-full rounded-xl " id="box-1">
+            <div class=" grid grid-rows-2 gap-3 text-2xl">
+                <div class="bg-green-500 h-full w-full rounded-xl " id="box-1">
                     <div>
                         <canvas class="max-h-64" id="age"></canvas>
                     </div>
@@ -104,7 +76,6 @@
                             .then((response) => response.json())
                             .then((data) => {
                                 const ctx = document.getElementById('age');
-                                console.log(data);
                                 new Chart(ctx, {
                                     type: 'doughnut',
                                     data: {
@@ -115,6 +86,14 @@
                                             borderWidth: 1
                                         }]
                                     },
+                                    options: {
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Percentage tussen man / vrouw'
+                                            }
+                                        }
+                                    }
                                 });
                             });
                     }
@@ -122,9 +101,9 @@
                     showAge();
                     </script>
                 </div>
-                <div class="bg-green-200 h-full w-full rounded-xl ">
+                <div class="bg-green-500 h-full w-full rounded-xl ">
 
-                    <div>
+                    <div class="h-64">
                         <canvas class="" id="bmi"></canvas>
                     </div>
                     <script>
@@ -133,8 +112,6 @@
                             .then((response) => response.json())
                             .then((data) => {
                                 const ctx = document.getElementById('bmi');
-                                console.log(ctx);
-                                console.log(data);
                                 new Chart(ctx, {
                                     type: 'doughnut',
                                     data: {
@@ -145,6 +122,16 @@
                                             borderWidth: 1
                                         }]
                                     },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Gemiddelde BMI'
+                                            }
+                                        }
+                                    }
                                 });
                             });
                     }
@@ -152,166 +139,43 @@
                     </script>
                 </div>
             </div>
-            <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="h-full w-full rounded-xl" id="box-3">
+            <div class=" grid grid-rows-2 gap-3 text-2xl">
+                <div class="bg-green-500 h-full w-full rounded-xl" id="box-3">
                     <div class="h-64">
                         <canvas class="" id="weight"></canvas>
                     </div>
                     <script>
-                    function showWeight() {
-                        fetch('http://localhost:8000/api/data/weight/count')
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const ctx = document.getElementById('weight');
-                                console.log(ctx);
-                                console.log(data);
-                                new Chart(ctx, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: ['Man', 'Vrouw'],
-                                        datasets: [{
-                                            label: 'kg',
-                                            data: [data.men, data.women],
-                                            borderWidth: 1
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            title: {
-                                                display: true,
-                                                text: 'Gemiddelde gewicht'
-                                            }
-                                        }
-                                    }
-                                });
-                            });
-                    }
-                    showWeight();
+                    show('weight/avg', 'weight', 'Gemiddelde gewicht in kg');
                     </script>
 
                 </div>
-                <div class="bg-pink h-full w-full rounded-xl " id="box-4">
+                <div class="bg-green-500 h-full w-full rounded-xl " id="box-4">
 
                     <div class="h-64">
                         <canvas class="" id="height"></canvas>
                     </div>
                     <script>
-                    function showHeight() {
-                        fetch('http://localhost:8000/api/data/height/count')
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const ctx = document.getElementById('height');
-                                console.log(ctx);
-                                console.log(data);
-                                new Chart(ctx, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: ['Man', 'Vrouw'],
-                                        datasets: [{
-                                            label: 'cm',
-                                            data: [data.men, data.women],
-
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            title: {
-                                                display: true,
-                                                text: 'Gemiddelde lengte'
-                                            }
-                                        }
-                                    }
-                                });
-                            });
-                    }
-                    showHeight();
+                    show('height/avg', 'height', 'Gemiddelde hoogte in cm');
                     </script>
                 </div>
             </div>
-            <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="bg-yellow h-full w-full rounded-xl " id="box-5">
-
+            <div class=" grid grid-rows-2 gap-3 text-2xl">
+                <div class="bg-green-500 h-full w-full rounded-xl " id="box-5">
                     <div class="h-64">
-                        <canvas class="" id="calIntakeMen"></canvas>
-
+                        <canvas class="" id="calIntake"></canvas>
                     </div>
                     <script>
-                    function showCalorieIntake() {
-                        fetch('http://localhost:8000/api/data/kcal_intake/count')
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const ctx = document.getElementById('calIntakeMen');
-                                console.log(ctx);
-                                console.log(data);
-                                new Chart(ctx, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: ['30-40', '41-50', '51-61'],
-                                        datasets: [{
-                                            label: 'kcal',
-                                            data: [
-                                                data.men.a, data.women.a, data.men.b, data.men.c
-                                            ],
-
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            title: {
-                                                display: true,
-                                                text: 'Gemiddelde kcal inname man'
-                                            }
-                                        }
-                                    }
-                                });
-                            });
-                    }
-                    showCalorieIntake();
+                    show('kcal_intake/avg', 'calIntake', 'Gemiddelde kcal inname');
                     </script>
                 </div>
-                <div class="bg-yellow h-full w-full rounded-xl " id="box-6">
+                <div class="bg-green-500 h-full w-full rounded-xl " id="box-6">
 
                     <div class="h-64">
                         <canvas class="" id="dbp"></canvas>
 
                     </div>
                     <script>
-                    function showDbp() {
-                        fetch('http://localhost:8000/api/data/dbp/avg')
-                            .then((response) => response.json())
-                            .then((data) => {
-                                const ctx = document.getElementById('dbp');
-                                console.log(ctx);
-                                console.log(data);
-                                new Chart(ctx, {
-                                    type: 'bar',
-                                    data: {
-                                        labels: ['Man', 'Vrouw'],
-                                        datasets: [{
-                                            label: 'Bloeddruk',
-                                            data: [data.men, data.women],
-                                        }]
-                                    },
-                                    options: {
-                                        responsive: true,
-                                        maintainAspectRatio: false,
-                                        plugins: {
-                                            title: {
-                                                display: true,
-                                                text: 'Gemiddelde bloeddruk'
-                                            }
-                                        }
-                                    }
-                                });
-                            });
-                    }
-                    showDbp();
+                    show('dbp/avg', 'dbp', 'Gemiddelde bloeddruk');
                     </script>
                 </div>
             </div>
