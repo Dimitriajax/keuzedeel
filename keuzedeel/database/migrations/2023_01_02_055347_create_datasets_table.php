@@ -21,7 +21,7 @@ return new class extends Migration
         Schema::create('datasets', function (Blueprint $table) {
             $table->id();
             $table->integer('gender')->nullable();
-            $table->float('age')->nullable();
+            $table->integer('age')->nullable();
             $table->float('bmi')->nullable();
             $table->float('weight')->nullable();
             $table->float('height')->nullable();

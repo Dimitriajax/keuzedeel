@@ -46,6 +46,29 @@ class DatasetController extends Controller
 
         if ($filter == 'avg') {
 
+            if ($colomn == 'dbp') {
+                $dataList = Dataset::select($colomn, 'gender')
+                    ->get();
+
+
+                foreach ($dataList as $value) {
+
+                    if ($value['gender'] == 1) {
+                        $dps['men'][] = $value['dbp'];
+                    }
+                    if ($value['gender'] == 2) {
+                        $dps['women'][] = $value['dbp'];
+                    }
+                }
+
+                $avgBbp['men'] =  round(array_sum($dps['men']) / (count($dps['men'])), 2);
+                $avgBbp['women'] =  round(array_sum($dps['women']) / (count($dps['women'])),2);
+
+
+                return response($avgBbp);
+            }
+
+
             $deniedAccess = array('gender');
 
             if (in_array($colomn, $deniedAccess)) {
@@ -177,8 +200,56 @@ class DatasetController extends Controller
                 $dataList = Dataset::select($colomn, 'gender', 'age')
                     ->get();
 
+                $kcalMen['30-40'] = [];
+                foreach ($dataList as $value) {
 
-                return $dataList;
+                    if ($value['gender'] == 1) {
+                        if ($value['age'] >= 30 && $value['age'] <= 40) {
+                            $kcalMen['30-40'][] = $value['kcal_intake'];
+                        }
+
+                        if ($value['age'] >= 41 && $value['age'] <= 50) {
+                            $kcalMen['41-50'][] = $value['kcal_intake'];
+                        }
+
+                        if ($value['age'] >= 51 && $value['age'] <= 65) {
+                            $kcalMen['51-65'][] = $value['kcal_intake'];
+                        }
+                    }
+
+                    if ($value['gender'] == 2) {
+                        if ($value['age'] < 30) {
+                        }
+
+                        if ($value['age'] >= 30 && $value['age'] <= 40) {
+                            $kcalWomen['30-40'][] = $value['kcal_intake'];
+                        }
+
+                        if ($value['age'] >= 41 && $value['age'] <= 50) {
+                            $kcalWomen['41-50'][] = $value['kcal_intake'];
+                        }
+
+                        if ($value['age'] >= 51 && $value['age'] <= 65) {
+                            $kcalWomen['51-65'][] = $value['kcal_intake'];
+                        }
+                    }
+                }
+
+                $avgKcalMen['30-40'] = array_sum($kcalMen['30-40']) / (count($kcalMen['30-40']));
+                $avgKcalMen['41-50'] = array_sum($kcalMen['41-50']) / (count($kcalMen['41-50']));
+                $avgKcalMen['51-65'] = array_sum($kcalMen['51-65']) / (count($kcalMen['51-65']));
+
+                $avgKcalMens = array('30-40' => round($avgKcalMen['30-40'], 0), '41-50' => round($avgKcalMen['41-50'], 0), '51-65' => round($avgKcalMen['51-65'], 0));
+
+                $avgKcalWomen['30-40'] = array_sum($kcalWomen['30-40']) / (count($kcalWomen['30-40']));
+                $avgKcalWomen['41-50'] = array_sum($kcalWomen['41-50']) / (count($kcalWomen['41-50']));
+                $avgKcalWomen['51-65'] = array_sum($kcalWomen['51-65']) / (count($kcalWomen['51-65']));
+
+                $avgKcalMens = array('a' => round($avgKcalMen['30-40'], 0), 'b' => round($avgKcalMen['41-50'], 0), 'c' => round($avgKcalMen['51-65'], 0));
+                $avgKcalWomens = array('a' => round($avgKcalWomen['30-40'], 0), '41-50' => round($avgKcalWomen['41-50'], 0), '51-65' => round($avgKcalWomen['51-65'], 0));
+
+
+                return response()->json(['men' => $avgKcalMens, 'women' => $avgKcalWomens]);
             }
         }
     }

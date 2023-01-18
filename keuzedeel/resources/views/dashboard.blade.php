@@ -96,7 +96,7 @@
             <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
                 <div class="bg-green-200 h-full w-full rounded-xl " id="box-1">
                     <div>
-                        <canvas class=" max-h-64" id="age"></canvas>
+                        <canvas class="max-h-64" id="age"></canvas>
                     </div>
                     <script>
                     function showAge() {
@@ -125,7 +125,7 @@
                 <div class="bg-green-200 h-full w-full rounded-xl ">
 
                     <div>
-                        <canvas class=" max-h-64" id="bmi"></canvas>
+                        <canvas class="" id="bmi"></canvas>
                     </div>
                     <script>
                     function showBmi() {
@@ -153,10 +153,9 @@
                 </div>
             </div>
             <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="bg-blue h-full w-full rounded-xl" id="box-3">
-
-                    <div>
-                        <canvas class=" max-h-64" id="weight"></canvas>
+                <div class="h-full w-full rounded-xl" id="box-3">
+                    <div class="h-64">
+                        <canvas class="" id="weight"></canvas>
                     </div>
                     <script>
                     function showWeight() {
@@ -177,6 +176,8 @@
                                         }]
                                     },
                                     options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
                                         plugins: {
                                             title: {
                                                 display: true,
@@ -193,7 +194,7 @@
                 </div>
                 <div class="bg-pink h-full w-full rounded-xl " id="box-4">
 
-                    <div>
+                    <div class="h-64">
                         <canvas class="" id="height"></canvas>
                     </div>
                     <script>
@@ -215,6 +216,8 @@
                                         }]
                                     },
                                     options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
                                         plugins: {
                                             title: {
                                                 display: true,
@@ -227,15 +230,89 @@
                     }
                     showHeight();
                     </script>
-
                 </div>
             </div>
             <div class="bg-green-500 grid grid-rows-2 gap-3 text-2xl">
-                <div class="bg-yellow h-full w-full rounded-xl hidden" id="box-5">
+                <div class="bg-yellow h-full w-full rounded-xl " id="box-5">
 
+                    <div class="h-64">
+                        <canvas class="" id="calIntakeMen"></canvas>
+
+                    </div>
+                    <script>
+                    function showCalorieIntake() {
+                        fetch('http://localhost:8000/api/data/kcal_intake/count')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('calIntakeMen');
+                                console.log(ctx);
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['30-40', '41-50', '51-61'],
+                                        datasets: [{
+                                            label: 'kcal',
+                                            data: [
+                                                data.men.a, data.women.a, data.men.b, data.men.c
+                                            ],
+
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Gemiddelde kcal inname man'
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                    }
+                    showCalorieIntake();
+                    </script>
                 </div>
-                <div class="bg-yellow h-full w-full rounded-xl hidden" id="box-6">
+                <div class="bg-yellow h-full w-full rounded-xl " id="box-6">
 
+                    <div class="h-64">
+                        <canvas class="" id="dbp"></canvas>
+
+                    </div>
+                    <script>
+                    function showDbp() {
+                        fetch('http://localhost:8000/api/data/dbp/avg')
+                            .then((response) => response.json())
+                            .then((data) => {
+                                const ctx = document.getElementById('dbp');
+                                console.log(ctx);
+                                console.log(data);
+                                new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: ['Man', 'Vrouw'],
+                                        datasets: [{
+                                            label: 'Bloeddruk',
+                                            data: [data.men, data.women],
+                                        }]
+                                    },
+                                    options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        plugins: {
+                                            title: {
+                                                display: true,
+                                                text: 'Gemiddelde bloeddruk'
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                    }
+                    showDbp();
+                    </script>
                 </div>
             </div>
         </div>
