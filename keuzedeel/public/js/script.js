@@ -5,30 +5,21 @@ let count = checked.length;
 let array = [];
 let squares = [];
 
-show();
+showbox();
 
-async function fetchData(file) {
-    const res = await fetch(file);
-    const fetched = await res.json();
-    return fetched;
-}
+function showbox() {
+    boxes.forEach(box => {
+        box.addEventListener('click', () => {
+            if (count == 6 && box.checked) {
+                change(box, count);
+                return;
+            }
 
-function show() {
-    const retrieved = fetchData('data.json');
-    retrieved.then((data) => {
-        boxes.forEach(box => {
-            box.addEventListener('click', () => {
-                if (count == 6 && box.checked) {
-                    change(box, count);
-                    return;
-                }
+            count = change(box, count);
+            count == 0 && (array = []);
 
-                count = change(box, count);
-                count == 0 && (array = []);
-
-                updateArray(array, count);
-                showSquares(squares, array, data, box);
-            });
+            updateArray(array, count);
+            showSquares(squares, array);
         });
     });
 }
@@ -38,18 +29,10 @@ for (let i = 1; i <= 6; i++) {
     squares.push(box);
 }
 
-function showSquares(squares, array, data, box) {
+function showSquares(squares, array) {
     squares.forEach(square => {
         appear(square, array);
     });
-
-    // if (array.length >= 1) {
-    //     data.forEach(d => {
-    //         if (box.id == d.category) {
-    //             squares[count - 1].innerText = d.category;
-    //         }
-    //     });
-    // }
 }
 
 function appear(box, array) {

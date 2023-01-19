@@ -54,11 +54,52 @@ input:checked+.slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
 .slider.round {
     border-radius: 34px;
 }
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+#container-block > div {
+    height: 50%;
+    border: 4px;
+    width: 21.4vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#container-block > div:nth-child(1),  #container-block > div:nth-child(5){
+    border: 8px solid #E2539F;
+}
+
+#container-block > div:nth-child(2),  #container-block > div:nth-child(4){
+    border: 8px solid #40EEEE;
+}
+
+#container-block > div:nth-child(3),  #container-block > div:nth-child(6){
+    border: 8px solid #f5d937;
+}
+
+#container-block > div > div {
+    height: 85%;
+    width: 17.5vw;
+}
+
+@media only screen and (max-width: 600px) {
+    #container-block > div {
+        width: 100%;
+        height: 40vh;
+    }
+
+    #container-block > div > div {
+        width: 65%;
+    }
+
+}
+
+.test {
+    color: rgb(153, 251, 77);
 }
