@@ -27,13 +27,6 @@
                                 <span class="slider round"></span>
                             </label>
                         </div>
-                        <div class="flex justify-between w-full grid grid-cols-2 place-items-center ">
-                            <p class="font-bold text-lg text-end">BMI</p>
-                            <label class="switch">
-                                <input type="checkbox" id="BMI">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
                         <div class="flex justify-between w-full grid grid-cols-2 place-items-center">
                             <p class="font-bold text-lg">LENGTE</p>
                             <label class="switch">
@@ -59,6 +52,13 @@
                             <p class="font-bold text-lg">KCAL</p>
                             <label class="switch">
                                 <input type="checkbox" id="KCAL">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                        <div class="flex justify-between w-full grid grid-cols-2 place-items-center ">
+                            <p class="font-bold text-lg text-end">BMI</p>
+                            <label class="switch">
+                                <input type="checkbox" id="BMI">
                                 <span class="slider round"></span>
                             </label>
                         </div>
