@@ -35,15 +35,15 @@
                 <div class="flex justify-between flex-wrap gap-y-8">
                     <div class="relative text-sm md:w-fit w-full">
                         <label for="age" class="absolute bg-white -top-2 left-6 px-1 text-gray-600">Leeftijd</label>
-                        <input type="text" id="age" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full">
+                        <input type="text" id="age" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full focus:bg-white">
                     </div>
                     <div class="relative text-sm md:w-fit w-full">
                         <label for="length" class="absolute bg-white -top-2 left-6 px-1 text-gray-600">Lengte</label>
-                        <input type="text" id="length" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full">
+                        <input type="text" id="length" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full focus:bg-white">
                     </div>
                     <div class="relative text-sm md:w-fit w-full">
                         <label for="weight" class="absolute bg-white -top-2 left-6 px-1 text-gray-600">Gewicht</label>
-                        <input type="text" id="weight" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full">
+                        <input type="text" id="weight" class="border-[1px] rounded-xl md:rounded-2xl border-gray-400 py-3 px-3 md:max-w-[11.5rem] w-full focus:bg-white">
                     </div>
                 </div>
 
