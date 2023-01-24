@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/bmi', function() {
+    return view('bmi');
+})->name('bmi');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
