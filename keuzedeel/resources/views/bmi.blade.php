@@ -2,27 +2,27 @@
     <div class="md:max-w-6xl mx-auto ">
         <div class="flex flex-col gap-2 md:items-start items-center mb-4">
             <h1 class="md:text-5xl text-4xl mt-7 font-bold w-fit ">Reken jouw BMI uit!</h1>
-            <p class="text-xl text-grey-400 font-light w-fit">body mass index</p>
+            <p class="text-xl text-grey-400 font-light w-fit">Body Mass Index</p>
         </div>
         <div class=" flex gap-12">
             <div class="col-span-3 shadow-lg rounded-xl bg-white px-7 py-7 flex flex-col gap-6">
                 <form action="" method="POST" class="" id="metric">
                     @csrf
-                    <div class="flex gap-4 pb-6">
-                        <div class="flex gap-4">
-                            <p class="font-bold text-lg">JONGEN</p>
-                            <label class="switch">
-                                <input type="checkbox" id="Gender" checked>
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
-                        <div class="flex gap-4">
-                            <p class="font-bold text-lg">MEISJE</p>
-                            <label class="switch">
-                                <input type="checkbox" id="Gender">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+                    <div class="my-4">
+                        <fieldset class="mt-4">
+                            <legend class="sr-only">Gender</legend>
+                            <div class="space-y-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-10">
+                                <div class="flex items-center">
+                                    <input id="boy" name="gender" type="radio" checked class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="boy" class="ml-3 block text-sm font-medium text-gray-700">Jongen</label>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <input id="girl" name="gender" type="radio" class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500">
+                                    <label for="girl" class="ml-3 block text-sm font-medium text-gray-700">Meisje</label>
+                                </div>
+                            </div>
+                        </fieldset>
                     </div>
                     <div class="flex justify-between flex-wrap gap-2 w-2/3">
                         <div class="relative text-sm md:w-fit w-full">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="w-full flex justify-end">
-                        <input type="submit" value="bereken" class="w-fit border-[3px] font-bold  border-[#E2539F] px-6 py-1 rounded-lg">
+                        <input type="submit" value="Bereken jouw BMI" class="w-fit border-[3px]  border-[#E2539F] px-6 py-1 rounded-lg">
                     </div>
                 </form>
             </div>

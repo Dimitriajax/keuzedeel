@@ -34,7 +34,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="submit" value="Controleer score" class="p-2 border-2 border-[#E2539F] ">
+                        <input type="submit" value="Controleer score" class="w-fit border-[3px]  border-[#E2539F] px-6 py-1 rounded-lg ">
                     </form>
 
                 </div>
@@ -46,7 +46,6 @@
                 <p class="text-2xl mt-8">{{ $score }}%</p>
                 @endif
             </div>
-    </div>
     </div>
     <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute-z-10 md:bottom-4 md:h-fit h-36 object-cover">
 

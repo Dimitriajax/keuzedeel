@@ -10,6 +10,7 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
@@ -49,14 +50,23 @@
                         </x-slot>
                     </x-dropdown>
                 </div>
-                @guest
+            </div>
+
+
+            @guest
+            <div class="flex">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log In') }}
                     </x-nav-link>
                 </div>
-                @endguest
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        {{ __('Registeer') }}
+                    </x-nav-link>
+                </div>
             </div>
+            @endguest
 
 
             <!-- Settings Dropdown -->
