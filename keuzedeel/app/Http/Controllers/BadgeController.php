@@ -26,10 +26,6 @@ class BadgeController extends Controller
             ->get();
 
         
-
-
-
-
         // $lockedBadgesArray = BadgesUser::whereNot('user_id', $userId)
         //     ->get('badge_id')
         //     ->toArray();

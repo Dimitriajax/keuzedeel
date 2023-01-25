@@ -1,10 +1,6 @@
 <x-app-layout>
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/chart.js" defer></script>
-
-
     <div class="bg-[#F2F2F2] md:h-screen w-screen flex justify-center md:items-center ">
         <div class="md:w-[90%] md:mx-auto md:h-[75%] md:pt-0 w-full">
             <div class="flex h-full w-full flex gap-2 md:flex-row flex-col">
