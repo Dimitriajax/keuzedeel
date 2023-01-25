@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use App\Models\Badge;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -12,13 +13,28 @@ class BadgeSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
      */
+
     public function run()
     {
-        Badge::query()->create([
-            'title' => 'Badge 1',
-            'description' => 'text',
-            'badge_url' => 'https://www.iconpacks.net/icons/1/free-badge-icon-1361-thumb.png'
-        ]);
+        $badges = [
+            ['title' => 'bmi', 'url' =>  'bmi.png'],
+            ['title' => 'dbp', 'url' => 'bloeddruk.png'],
+            ['title' => 'kcal', 'url' => 'calorien.png'],
+            ['title' => 'gender', 'url' => 'geslacht.png'],
+            ['title' => 'weight', 'url' => 'kg.png'],
+            ['title' => 'height', 'url' => 'lengte.png'],
+        ];
+
+
+        foreach ($badges as $badge) {
+
+            Badge::query()->create([
+                'title' => $badge['title'],
+                'description' => '',
+                'badge_url' => $badge['url']
+            ]);
+        }
     }
 }

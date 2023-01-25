@@ -25,10 +25,22 @@ class BadgeController extends Controller
         $badges = Badge::whereIn('id', $collectedBadges)
             ->get();
 
+        
 
 
 
-        return view('badges', ['badges' => $badges]);
+
+        // $lockedBadgesArray = BadgesUser::whereNot('user_id', $userId)
+        //     ->get('badge_id')
+        //     ->toArray();
+
+
+        $lockedBadges = Badge::whereNotIn('id', $collectedBadges)
+        ->get();
+
+        // var_dump($lockedBadges);
+
+        return view('badges', ['badges' => $badges, 'lockedBadges' => $lockedBadges]);
     }
 
     /**

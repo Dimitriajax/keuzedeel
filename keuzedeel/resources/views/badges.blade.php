@@ -11,7 +11,27 @@
             @foreach($badges as $badge)
             <div class="flex p-4">
                 <div class="h-20 w-20 ">
-                    <img class="object-cover" src=" {{ $badge->badge_url }}" alt="">
+                    <img class="object-cover" src=" {{ asset($badge->badge_url) }}" alt="">
+                </div>
+
+                <div class="flex flex-col justify-between pl-4">
+                    <div>
+                        <p class="text-xl font-semibold">{{ $badge->title }}</p>
+                        <p class="text-md">{{ $badge->description}}</p>
+                    </div>
+                    <p class="text-sm italic">Gehaald op: {{ $badge->created_at->format('F j, Y') }}</p>
+                </div>
+            </div>
+            @endforeach
+        </div>
+
+        <div>
+            <h2>Nog niet behaalde badges</h2>
+
+            @foreach($lockedBadges as $badge)
+            <div class="flex p-4">
+                <div class="h-20 w-20 ">
+                    <img class="object-cover grayscale" src=" {{ asset($badge->badge_url) }}" alt="">
                 </div>
 
                 <div class="flex flex-col justify-between pl-4">
