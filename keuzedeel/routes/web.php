@@ -42,7 +42,9 @@ Route::get('/bereken/{type}', [CalculatorsController::class, 'index'])->name('be
 Route::post('/bereken/{type}', [CalculatorsController::class, 'calculate']);
 
 Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
-Route::post('quiz', [QuizController::class, 'checkResult'])->name('quiz');
+Route::post('quiz/{topic}', [QuizController::class, 'checkResult']);
+Route::get('quiz/{topic}', [QuizController::class, 'show'])->name('quiz-show');
+
 
 
 require __DIR__ . '/auth.php';

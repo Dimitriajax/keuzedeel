@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BadgesUser extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['user_id', 'badge_id'];
 }
