@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <body class="bg-base">
         <a class="space-y-2 left-8 top-6 absolute" href="#">
             <div class="w-9 h-1 bg-black"></div>
