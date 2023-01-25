@@ -1,6 +1,7 @@
 <x-app-layout>
+
     <div class="md:max-w-6xl mx-auto ">
-        <h1 class="md:text-5xl text-4xl mt-7 font-bold w-fit "">Test jouw kennis over het menselijk lichaam</h1>
+        <h1 class="md:text-5xl text-4xl mt-7 font-bold w-fit ">Test jouw kennis over het menselijk lichaam</h1>
         <div class=" grid grid-cols-1 md:flex md:justify-between">
             <div class="p-8 mr-12 w-full md:w-2/3">
                 <div class="bg-white rounded-md shadow-lg">
@@ -46,7 +47,7 @@
                 <p class="text-2xl mt-8">{{ $score }}%</p>
                 @endif
             </div>
-    </div>
-    <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute-z-10 md:bottom-4 md:h-fit h-36 object-cover">
+        </div>
+        <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute-z-10 md:bottom-4 md:h-fit h-36 object-cover">
 
 </x-app-layout>
