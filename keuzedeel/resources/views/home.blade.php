@@ -2,43 +2,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/chart.js" defer></script>
 
-    <div class="min-h-fit pb-12  ">
-        <div class="h-screen ">
-            <div class="absolute  right-96 md:block hidden">
-                <x-fruit-bord />
-            </div>
-            <div class="absolute -z-1 left-0 top-20 flex gap-8 h-82 w-fit">
-                <x-gezond-bord />
-                <div class="h-full flex flex-col gap-4 w-96 mt-14">
-                    <h2 class="text-4xl font-bold">'Gezond'</h2>
-                    <p class="pl-4 text-sm md:block hidden">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="absolute -z-10 top-72 right-0 flex gap-8 h-82 flex-row-reverse">
-                <x-vitaal-bord />
-                <div class="h-full flex flex-col gap-4 w-96 mt-14 text-right">
-                    <h2 class="text-4xl font-bold">'Vitaal'</h2>
-                    <p class="pr-4 text-sm md:block hidden">Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua.</p>
-                </div>
-            </div>
-            <div class="md:block hidden">
-                <div class="w-0 h-0 absolute bottom-0 left-0
-                border-b-[350px] border-b-white
-                border-r-[350px] border-r-transparent">
-                </div>
-                <a href="#dashboard">
-                    <img src="{{asset('Pijl.png')}}" alt="Arrows" class="h-32 absolute top-[38rem] left-20">
-                </a>
-            </div>
-        </div>
+    <div class="pb-56  overflow-x-hidden h-fit relative">
         <div class="">
-            <section class="md:h-[48rem] h-fit relative">
+            <section class="md:h-[48rem] h-fit relative py-20">
                 <div class="md:max-w-6xl mx-auto flex items-center flex-col pb-10 relative h-full md:px-0 px-4">
-                    <h2 class="text-5xl font-bold w-fit pb-14 ">ONTDEK</h2>
+                    {{-- <h2 class="text-5xl font-bold w-fit pb-14 ">ONTDEK</h2> --}}
                     <div class="relative w-full flex md:flex-row flex-col md:items-start items-center justify-between md:h-[42rem] md:gap-0 gap-6">
                         <div class="h-72 w-72 border-pink border-8 bg-pink bg-opacity-20 rounded-xl left-0">
                             <a href="{{ route('quiz')}}">
@@ -82,7 +50,7 @@
                 </div>
             </section>
 
-            <section class="bg-white md:h-80 h-fit md:py-0 py-4 flex items-center">
+            <section class="bg-white md:h-80 mb-8 h-fit md:py-0 py-4 flex items-center">
                 <div class="max-w-6xl mx-auto flex items-center justify-between md:px-0 px-4">
                     <div class="flex flex-col gap-4">
                         <h2 class="text-4xl font-bold w-fit md:pb-0 pb-4">Lorem ipsum dolor</h2>
@@ -100,12 +68,7 @@
                 </div>
             </section>
 
-
-            <div id="dashboard" class=" flex justify-center w-full  mt-12">
-
-                <h2 class="text-5xl font-bold w-fit">DASHBOARD</h2>
-            </div>
-            <section class="md:h-fit w-screen flex justify-center md:items-center">
+            <section class="md:h-screen w-screen flex justify-center md:items-center" >
                 <div class="md:max-w-7xl md:mx-auto h-full w-full md:py-20">
                     <div class="flex h-full w-full flex gap-2 md:flex-row flex-col">
                         <div class="bg-white rounded-xl md:w-1/4 h-fit md:static fixed w-full">
@@ -159,33 +122,36 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="container-block" class="flex md:flex-wrap gap-2 md:h-screen md:w-3/4 items-start md:flex-row flex-col md:pt-0 pt-96">
+                        <div id="container-block" class="flex md:flex-wrap gap-2 md:w-3/4 items-start md:flex-row flex-col md:pt-0 pt-96">
 
                         </div>
                     </div>
                 </div>
             </section>
+            <hr class="border-2 border-gray-200 max-w-7xl mx-auto">
             <div class="max-w-6xl mx-auto my-10">
                 <section>
-                    <h1 class="mb-8 text-5xl font-bold md:mx-0 mx-auto w-fit">Jouw badges</h1>
-                    <div class="flex flex-wrap gap-x-10 gap-y-14 justify-between md:flex-row flex-col md:items-start items-center">
-                        @foreach ($badges as $badge)
-                        <div class="h-64 bg-white shadow-lg w-56 rounded-lg px-4 py-4 flex items-center flex-col justify-between border-b-[5px] border-b-pink-400">
-                            <div class="flex items-center flex-col">
-                                <img src="{{ asset($badge->badge_url) }}" alt="badge {{$badge->title}}" class="h-36">
-                                <p class="text-2xl font-bold">{{ $badge->title }}</p>
+                    @if(count($badges) > 0 )
+                        <h1 class="mb-8 text-5xl font-bold md:mx-0 mx-auto w-fit">Jouw badges</h1>
+                        <div class="flex flex-wrap gap-x-10 gap-y-14 justify-between md:flex-row flex-col md:items-start items-center">
+                            @foreach ($badges as $badge)
+                            <div class="h-64 bg-white shadow-lg w-56 rounded-lg px-4 py-4 flex items-center flex-col justify-between border-b-[5px] border-b-pink-400">
+                                <div class="flex items-center flex-col">
+                                    <img src="{{ asset($badge->badge_url) }}" alt="badge {{$badge->title}}" class="h-36">
+                                    <p class="text-2xl font-bold">{{ $badge->title }}</p>
+                                </div>
+                                <span class="text-gray-500">{{ $badge->created_at->format('F j, Y')}}</span>
                             </div>
-                            <span class="text-gray-500">{{ $badge->created_at->format('F j, Y')}}</span>
+                            @endforeach
                         </div>
-                        @endforeach
-                    </div>
-                    <hr class="my-10 border-2 border-gray-200">
+                        <hr class="my-10 border-2 border-gray-200">
+                    @endif
                 </section>
-                <section>
-                    <h2 class="text-3xl font-bold mb-8 md:mx-0 mx-auto w-fit">Nog te behalen</h2>
-                    <div class="flex flex-wrap gap-y-6 md:gap-x-10 md:gap-y-14  justify-between md:items-start items-center md:flex-row flex-col">
+                <section class="h-fit">
+                    <h2 class="text-3xl font-bold mb-8 md:mx-0 mx-auto w-fit">Badges te behalen</h2>
+                    <div class="flex flex-wrap gap-y-6 md:gap-x-20 md:gap-y-14 justify-start md:items-start items-center md:flex-row flex-col mx-auto">
                         @foreach ($lockedBadges as $badge)
-                        <div class="h-64 bg-white shadow-lg w-56 rounded-lg px-4 py-4 flex items-center flex-col justify-between border-b-[5px] border-b-[#40EEEE]">
+                        <div class="h-64 bg-white shadow-lg w-56 rounded-lg px-4 py-4 flex items-center flex-col justify-start border-b-[5px] border-b-[#40EEEE]">
                             <div class="flex items-center flex-col">
                                 <img src="{{ asset($badge->badge_url) }}" alt="badge {{$badge->title}}" class="h-36 grayscale">
                                 <p class="text-2xl font-bold">{{ $badge->title }}</p>

@@ -5,18 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
-
-    <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased ">
-    <div class=" bg-gray-50">
+<body class="antialiased relative bg-[#F2F2F2] -z-10">
+    <div class="min-h-screen">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
@@ -34,9 +29,7 @@
         </main>
 
         <footer>
-            <div class="mt-14 relative pt-56">
-                <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute -z-1 md:bottom-4 md:h-fit h-36 object-cover">
-            </div>
+            <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute -z-1 md:bottom-4 md:h-fit h-36 object-cover">
         </footer>
     </div>
 </body>

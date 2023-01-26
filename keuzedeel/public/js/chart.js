@@ -5,28 +5,83 @@ let count = checked.length;
 const container = document.getElementById('container-block');
 let array = [];
 
+
+const data = [
+    {
+        "category" : "Gender",
+        "description" : "Geslacht",
+        "url" : "gender/count"
+    },
+    {
+        "category" : "BMI",
+        "description" : "Je BMI is een rekensommetje van hoe lang je bent en hoeveel je weegt.",
+        "url" : "bmi/count"
+    },
+    {
+        "category" : "Height",
+        "url" : "height/avg",
+        "text" : "Lengte",
+        "description" : "Met lengte meten we hoe snel je groeit. Wist je dat je ‘s ochtends langer bent dan ‘s avonds? Meet zelf maar eens!"
+    },
+    {
+        "category" : "Weight",
+        "url" : "weight/avg",
+        "text" : "Gewicht",
+        "description" : "Met gewicht meten we hoeveel je weegt."
+    },
+    {
+        "category" : "DBP",
+        "url" : "dbp/avg",
+        "text" : "Bloeddruk",
+        "description" : "Met bloeddruk meten we of je hart het bloed goed door je lichaam kan laten stromen. Dit is belangrijk zodat alles in je lichaam goed kan blijven werken."
+    },
+    {
+        "category" : "KCAL",
+        "url" : "kcal_intake/avg",
+        "text" : "KCAL inname",
+        "description" : "Een calorie is een maat voor het aantal energie dat in je eten zit."
+    }
+];
+
+let storage = [];
+
+if (!localStorage.getItem('switches')) {
+    switches.forEach(s => {
+        s.checked = true;
+        content(s);
+        storage.push({
+            'lever' : s.id,
+            'value' : s.checked
+        })
+    });
+    localStorage.setItem('switches', JSON.stringify(storage));
+    
+} else {
+    storage = JSON.parse(localStorage.getItem('switches'));
+    storage.forEach(el => {
+        if (el.value == true) {
+            let lever = document.getElementById(el.lever)
+            lever.checked = true;
+        }
+    });  
+    
+    switches.forEach(s => {s.checked && content(s);})
+}
+
 showBox();
 
 function showBox() {
     switches.forEach(lever => {
         lever.addEventListener('click', () => {
-            if (count == 6 && lever.checked) {
-                return lever.checked == false;
-            }
+            content(lever)
+            let stored = JSON.parse(localStorage.getItem('switches'))
+            stored.forEach(element => {
+                if (element.lever == lever.id) {
+                    element.value = lever.checked;
+                }
+            });
 
-            count = change(lever, count);
-            count == 0 && (array = []);
-
-            if (!array.includes(document.getElementById(`${lever.id}-box`)) && lever.checked) {
-                array.push(Container(lever, count));
-            }
-
-            if (lever.checked) {
-                let box = container.appendChild(array[array.length -1]);
-                fill(lever, box, data);
-            }
-
-            update(lever, array)
+            localStorage.setItem('switches', JSON.stringify(stored));
         });
     });
 }
@@ -61,9 +116,10 @@ function fill(lever, box, data)
             back.innerText = d.description;
             if (lever.id == 'BMI') {
                 back.appendChild(button());
-                showBmi(canvas);
+                return showBmi(canvas, d.url);
+            } else if(lever.id == 'Gender') {
+                return showGender(canvas, d.url);
             }
-            lever.id == 'Gender' && showGender(canvas);
 
             return show(d.url, canvas, d.text);
         }
@@ -104,8 +160,8 @@ function Container(lever)
     return parent;
 }
 
-function showBmi(id) {
-    fetch('http://localhost:8000/api/data/bmi/count')
+function showBmi(id, url) {
+    fetch('http://localhost:8000/api/data/' + url)
         .then((response) => response.json())
         .then((data) => {
             const ctx = document.getElementById(id);
@@ -146,8 +202,8 @@ function button()
     return button
 }
 
-function showGender(id) {
-    fetch('http://localhost:8000/api/data/gender/count')
+function showGender(id, url) {
+    fetch('http://localhost:8000/api/data/' + url)
         .then((response) => response.json())
         .then((data) => {
             const ctx = document.getElementById(id);
@@ -168,7 +224,7 @@ function showGender(id) {
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Percentage tussen man / vrouw'
+                            text: 'Geslacht'
                         }
                     }
                 }
@@ -218,37 +274,35 @@ function show(url, id, title) {
         });
 }
 
-const data = [
-    {
-        "category" : "Gender",
-        "description" : "Geslacht"
-    },
-    {
-        "category" : "BMI",
-        "description" : "Je BMI is een rekensommetje van hoe lang je bent en hoeveel je weegt."
-    },
-    {
-        "category" : "Height",
-        "url" : "height/avg",
-        "text" : "Lengte",
-        "description" : "Met lengte meten we hoe snel je groeit. Wist je dat je ‘s ochtends langer bent dan ‘s avonds? Meet zelf maar eens!"
-    },
-    {
-        "category" : "Weight",
-        "url" : "weight/avg",
-        "text" : "Gewicht",
-        "description" : "Met gewicht meten we hoeveel je weegt."
-    },
-    {
-        "category" : "DBP",
-        "url" : "dbp/avg",
-        "text" : "Bloeddruk",
-        "description" : "Met bloeddruk meten we of je hart het bloed goed door je lichaam kan laten stromen. Dit is belangrijk zodat alles in je lichaam goed kan blijven werken."
-    },
-    {
-        "category" : "KCAL",
-        "url" : "kcal_intake/avg",
-        "text" : "KCAL inname",
-        "description" : "Een calorie is een maat voor het aantal energie dat in je eten zit."
+
+function content(lever) {
+    if (count == 6 && lever.checked) {
+        return lever.checked == false;
     }
-];
+
+    count = change(lever, count);
+    count == 0 && (array = []);
+
+    if (!array.includes(document.getElementById(`${lever.id}-box`)) && lever.checked) {
+        array.push(Container(lever, count));
+    }
+
+    if (lever.checked) {
+        let box = container.appendChild(array[array.length -1]);
+        fill(lever, box, data);
+    }
+
+    update(lever, array)
+}
+
+// function check()
+// {
+//     checked.forEach(lever => {
+//            if (!array.includes(document.getElementById(`${lever.id}-box`))) {
+//                array.push(Container(lever, count));
+//                let box = container.appendChild(array[array.length -1]);
+//                fill(lever, box, data);
+//                update(lever, array)
+//             }
+//     });
+// }
