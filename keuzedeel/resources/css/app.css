@@ -108,9 +108,9 @@ input:checked+.slider:before {
 }
 
 .parent {
-    height: 50%;
+    height: 45%;
     border: 4px;
-    width: 21.4vw;
+    width: 30%;
     display: flex;
     align-items: center;
     justify-content: center;

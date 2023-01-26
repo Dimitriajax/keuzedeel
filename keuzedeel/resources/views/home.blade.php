@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="container-block" class="flex md:flex-wrap gap-2 md:w-3/4 items-start md:flex-row flex-col md:pt-0 pt-96">
+                        <div id="container-block" class="flex md:flex-wrap gap-x-2 md:w-3/4 items-start md:flex-row flex-col md:pt-0 pt-96">
 
                         </div>
                     </div>
@@ -156,7 +156,6 @@
                                 <img src="{{ asset($badge->badge_url) }}" alt="badge {{$badge->title}}" class="h-36 grayscale">
                                 <p class="text-2xl font-bold">{{ $badge->title }}</p>
                             </div>
-                            <span class="text-gray-500">{{ $badge->created_at->format('F j, Y')}}</span>
                         </div>
                         @endforeach
                     </div>

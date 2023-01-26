@@ -39,9 +39,6 @@
                             <x-dropdown-link :href="route('bereken', 'bmi')">
                                 {{ __('BMI') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('bereken', 'calorie-intake')">
-                                {{ __('Calorie inname') }}
-                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>

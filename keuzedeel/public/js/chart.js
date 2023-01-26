@@ -194,7 +194,7 @@ function showBmi(id, url) {
 function button()
 {
     const button = document.createElement('a');
-    button.href = '/';
+    button.href = '/bereken/bmi';
     button.innerText = 'Reken jouw bmi uit!';
     button.id = 'BMI-btn'
 
