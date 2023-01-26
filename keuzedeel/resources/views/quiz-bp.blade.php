@@ -62,6 +62,4 @@
                 @endif
             </div>
         </div>
-        <img src="{{asset('cirkels.png')}}" alt="cirkels" class="md:w-full absolute-z-10 md:bottom-4 md:h-fit h-36 object-cover">
-
 </x-app-layout>

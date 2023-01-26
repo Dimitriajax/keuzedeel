@@ -55,7 +55,7 @@ if (!localStorage.getItem('switches')) {
         })
     });
     localStorage.setItem('switches', JSON.stringify(storage));
-    
+
 } else {
     storage = JSON.parse(localStorage.getItem('switches'));
     storage.forEach(el => {
@@ -80,7 +80,6 @@ function showBox() {
                     element.value = lever.checked;
                 }
             });
-
             localStorage.setItem('switches', JSON.stringify(stored));
         });
     });
@@ -295,14 +294,3 @@ function content(lever) {
     update(lever, array)
 }
 
-// function check()
-// {
-//     checked.forEach(lever => {
-//            if (!array.includes(document.getElementById(`${lever.id}-box`))) {
-//                array.push(Container(lever, count));
-//                let box = container.appendChild(array[array.length -1]);
-//                fill(lever, box, data);
-//                update(lever, array)
-//             }
-//     });
-// }
